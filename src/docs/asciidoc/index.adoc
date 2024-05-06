@@ -1,0 +1,16 @@
+ifndef::snippets[]
+:snippets: ../../../../build/generated-snippets
+endif::[]
+= JK.IO REST API 문서
+:doctype: book
+:icon: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[carete-bard]]
+== BoardAPI
+=== 게시물 생성
+
+include::api/board.adoc[]

@@ -24,9 +24,6 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-}
 
 dependencies {
 	//security
@@ -58,16 +55,7 @@ dependencies {
 }
 
 ext {
-	snippetsDir = file('build/generated-snippet')
-}
-tasks.named('test') {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
-}
-
-tasks.named('asciidoctor') {
-	inputs.dir snippetsDir
-	dependsOn test
+	snippetsDir = file('build/generated-snippets')
 }
 
 test {
@@ -82,7 +70,7 @@ asciidoctor {
 	sources {
 		include("**/index.adoc")
 	}
-	baseDirFollowsSourceDir()
+	baseDirFollowsSourceFile()
 	dependsOn test
 }
 
