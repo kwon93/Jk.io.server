@@ -1,12 +1,54 @@
 
-
+=== 게시물 생성
 
 ==== HTTP Request
 include::{snippets}/create-board/http-request.adoc[]
 include::{snippets}/create-board/request-fields.adoc[]
 
 
-=== HTTP Response
+==== HTTP Response
 include::{snippets}/create-board/http-response.adoc[]
+
+=== 게시물 조회
+
+==== HTTP Request
+include::{snippets}/getOne-board/http-request.adoc[]
+include::{snippets}/getOne-board/path-parameters.adoc[]
+
+==== HTTP Response
+include::{snippets}/getOne-board/http-response.adoc[]
+include::{snippets}/getOne-board/response-fields.adoc[]
+
+=== 게시물 페이지 조회
+
+==== HTTP Request
+include::{snippets}/paged-board/http-request.adoc[]
+include::{snippets}/paged-board/query-parameters.adoc[]
+
+==== HTTP Response
+include::{snippets}/paged-board/http-response.adoc[]
+include::{snippets}/paged-board/response-fields.adoc[]
+
+
+=== 게시물 수정
+
+==== HTTP Request
+include::{snippets}/update-board/http-request.adoc[]
+include::{snippets}/update-board/request-fields.adoc[]
+
+
+==== HTTP Response
+include::{snippets}/update-board/http-response.adoc[]
+include::{snippets}/update-board/response-fields.adoc[]
+
+
+=== 게시물 삭제
+
+==== HTTP Request
+include::{snippets}/delete-board/http-request.adoc[]
+include::{snippets}/delete-board/path-parameters.adoc[]
+
+==== HTTP Response
+include::{snippets}/delete-board/http-response.adoc[]
 
 

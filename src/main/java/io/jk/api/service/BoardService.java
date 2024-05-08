@@ -1,6 +1,7 @@
 package io.jk.api.service;
 
 import io.jk.api.controller.dto.BoardPageDto;
+import io.jk.api.controller.dto.CreateBoardDto;
 import io.jk.api.controller.dto.UpdateBoardRequest;
 import io.jk.api.service.dto.BoardListByPaged;
 import io.jk.api.service.dto.OneBoardResponse;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BoardService {
 
-    public OneBoardResponse getBoard() {
+    public OneBoardResponse getBoard(Long boardId) {
         return new OneBoardResponse();
     }
 
-    public void createBoard() {
+    public void createBoard(CreateBoardDto createBoardDto) {
     }
 
     public BoardListByPaged getPage(BoardPageDto boardPageDto) {

@@ -11,6 +11,6 @@ endif::[]
 
 [[carete-bard]]
 == BoardAPI
-=== 게시물 생성
+
 
 include::api/board.adoc[]

@@ -21,13 +21,13 @@ public class BoardController {
 
     @PostMapping("board")
     public ResponseEntity<Void> createBoard(@RequestBody CreateBoardDto createBoardDto){
-        boardService.createBoard();
+        boardService.createBoard(createBoardDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("board/{boardId}")
     public ResponseEntity<OneBoardResponse> getBoard(@PathVariable("boardId") Long boardId){
-        OneBoardResponse response = boardService.getBoard();
+        OneBoardResponse response = boardService.getBoard(boardId);
         return ResponseEntity.ok(response);
     }
 
