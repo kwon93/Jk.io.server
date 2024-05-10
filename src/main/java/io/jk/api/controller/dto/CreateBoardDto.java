@@ -16,12 +16,11 @@ public class CreateBoardDto {
     private String content;
     private String category;
 
-
     @Builder
     public CreateBoardDto(String title, String content, String category) {
         this.title = title;
         this.content = content;
-        this.category = category;
+        this.category = category == null? "GENERAL" : category;
     }
 
 

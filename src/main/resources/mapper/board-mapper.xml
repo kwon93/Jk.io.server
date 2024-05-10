@@ -3,9 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Board">
+<mapper namespace="Board-mapper">
     <insert id="createBoard" parameterType="board">
         INSERT INTO board (title, content, category, view_count, created_at, modified_at)
         VALUES (#{title}, #{content}, #{category}, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     </insert>
+
+    <select id="getBoard" parameterType="Long" resultType="board">
+        SELECT board_id, category, title, content, view_count
+        FROM board
+        WHERE board_id = #{boardId}
+    </select>
+
+
 </mapper>

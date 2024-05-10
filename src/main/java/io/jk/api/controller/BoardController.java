@@ -10,6 +10,7 @@ import io.jk.api.service.dto.UpdatedBoardDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController(value = "api")
@@ -20,7 +21,7 @@ public class BoardController {
 
 
     @PostMapping("board")
-    public ResponseEntity<Void> createBoard(@RequestBody CreateBoardDto createBoardDto){
+    public ResponseEntity<Void> createBoard(@RequestBody @Validated CreateBoardDto createBoardDto){
         boardService.createBoard(createBoardDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -38,7 +39,7 @@ public class BoardController {
     }
 
     @PatchMapping("board/{boardId}")
-    public ResponseEntity<UpdatedBoardDto> updateBoard(@PathVariable("boardId") Long boardId, @RequestBody UpdateBoardRequest updateBoardRequest){
+    public ResponseEntity<UpdatedBoardDto> updateBoard(@PathVariable("boardId") Long boardId, @RequestBody @Validated UpdateBoardRequest updateBoardRequest){
         UpdatedBoardDto response = boardService.update(updateBoardRequest, boardId);
         return ResponseEntity.ok(response);
     }
