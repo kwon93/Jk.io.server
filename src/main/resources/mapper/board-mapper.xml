@@ -15,5 +15,25 @@
         WHERE board_id = #{boardId}
     </select>
 
+    <select id="getPage" resultType="io.jk.api.service.dto.BoardListByPaged">
+        SELECT *
+        FROM board
+        ORDER BY created_at DESC
+        LIMIT #{size}
+        OFFSET #{offset}
+    </select>
+
+    <update id="updateBoard" parameterType="board">
+        UPDATE board
+        SET title = #{title}, content = #{content}, modified_at = CURRENT_TIMESTAMP
+        WHERE board_id = #{boardId}
+    </update>
+
+
+    <delete id="deleteBoard" parameterType="Long">
+        DELETE FROM board
+        WHERE board_id = #{boardId}
+    </delete>
+
 
 </mapper>

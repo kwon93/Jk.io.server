@@ -1,6 +1,7 @@
 package io.jk.api.domain;
 
 import io.jk.api.controller.dto.CreateBoardDto;
+import io.jk.api.controller.dto.UpdateBoardRequest;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,14 @@ public class Board {
                 title(createBoardDto.getTitle())
                 .content(createBoardDto.getContent())
                 .category(createBoardDto.getCategory())
+                .build();
+    }
+
+    public static Board fromUpdateDto(UpdateBoardRequest updateBoardRequest, Long boardId){
+        return Board.builder()
+                .boardId(boardId)
+                .title(updateBoardRequest.getUpdateTitle())
+                .content(updateBoardRequest.getUpdateContent())
                 .build();
     }
 

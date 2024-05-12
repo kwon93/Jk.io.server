@@ -11,11 +11,13 @@ public class BoardPageDto {
 
     private Integer page = 1;
     private Integer size = 10;
+    private Integer offset;
 
     @Builder
     public BoardPageDto(Integer page, Integer size) {
         this.page = page == null? 1 : page;
         this.size = size == null? 10 : size;
+        this.offset = (Math.max(1, page) -1 ) * size;
     }
 
     public int getOffset(){

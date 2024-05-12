@@ -16,4 +16,10 @@ public class BoardListByPaged {
     public BoardListByPaged(List<OneBoardResponse> boards) {
         this.boards = boards;
     }
+
+    public static BoardListByPaged of(List<OneBoardResponse> boards){
+        return BoardListByPaged.builder()
+                .boards(boards)
+                .build();
+    }
 }

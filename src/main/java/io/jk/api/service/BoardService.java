@@ -10,9 +10,13 @@ import io.jk.api.service.dto.OneBoardResponse;
 import io.jk.api.service.dto.UpdatedBoardDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BoardService {
 
     private final BoardRepository boardRepository;
@@ -22,19 +26,29 @@ public class BoardService {
         return OneBoardResponse.of(board);
     }
 
+    @Transactional
     public void createBoard(CreateBoardDto createBoardDto) {
         boardRepository.createBoard(Board.of(createBoardDto));
     }
 
     public BoardListByPaged getPage(BoardPageDto boardPageDto) {
-        return new BoardListByPaged();
+        List<OneBoardResponse> pages = boardRepository.getPage(boardPageDto);
+        return BoardListByPaged.of(pages);
     }
 
+    @Transactional
     public UpdatedBoardDto update(UpdateBoardRequest updateBoardRequest, Long boardId) {
-        return new UpdatedBoardDto();
+        Board board = Board.fromUpdateDto(updateBoardRequest, boardId);
+        boardRepository.updateBoard(board);
+        Board updatedBoard = boardRepository.getBoard(board.getBoardId());
+        return UpdatedBoardDto.builder()
+                .updatedTitle(updatedBoard.getTitle())
+                .updatedContent(updatedBoard.getContent())
+                .build();
     }
 
+    @Transactional
     public void delete(Long boardId) {
-
+        boardRepository.deleteBoard(boardId);
     }
 }
