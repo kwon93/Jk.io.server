@@ -15,10 +15,10 @@
         WHERE board_id = #{boardId}
     </select>
 
-    <select id="getPage" resultType="io.jk.api.service.dto.BoardListByPaged">
-        SELECT *
+    <select id="getPage" resultType="io.jk.api.service.dto.OneBoardResponse">
+        SELECT board_id, category, title, content, view_count
         FROM board
-        ORDER BY created_at DESC
+        ORDER BY board_id DESC
         LIMIT #{size}
         OFFSET #{offset}
     </select>

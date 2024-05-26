@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Session-mapper">
+    <insert id="createSession" parameterType="session">
+        INSERT INTO session (session_id, member_id, member_email, created_at)
+        VALUES (#{sessionId}, #{memberId}, #{memberEmail}, CURRENT_TIMESTAMP)
+    </insert>
+
+    <select id="findByMemberEmail" parameterType="String" resultType="session">
+        SELECT *
+        FROM session
+        WHERE member_email = #{email}
+    </select>
+
+    <delete id="deleteSession" parameterType="String">
+        DELETE FROM session
+        WHERE session_id = #{sessionId}
+    </delete>
+</mapper>

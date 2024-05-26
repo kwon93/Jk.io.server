@@ -9,5 +9,7 @@
 
     <typeAliases>
         <typeAlias type="io.jk.api.domain.Board" alias="board"/>
+        <typeAlias type="io.jk.api.domain.Member" alias="member"/>
+        <typeAlias type="io.jk.api.domain.Session" alias="session"/>
     </typeAliases>
 </configuration>
