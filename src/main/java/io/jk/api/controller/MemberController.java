@@ -31,7 +31,7 @@ public class MemberController {
         return ResponseEntity.ok(member.getMemberId());
     }
 
-    @PostMapping("/userLogin")
+    @PostMapping("/login")
     public ResponseEntity<String > login(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
         String sessionId = memberService.login(loginRequest);
 

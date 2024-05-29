@@ -2,6 +2,6 @@ package io.jk.api.controller;
 
 
 public enum Role {
-    NORMAL,
-    ADMIN
+    ROLE_NORMAL,
+    ROLE_ADMIN
 }
