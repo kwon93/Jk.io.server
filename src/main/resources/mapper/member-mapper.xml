@@ -10,7 +10,7 @@
     </insert>
 
     <select id="findByEmail" parameterType="String" resultType="member">
-        SELECT member_id
+        SELECT *
         FROM member
         WHERE email = #{email}
     </select>

@@ -16,6 +16,12 @@
         WHERE member_email = #{email}
     </select>
 
+    <select id="findById" parameterType="String" resultType="session">
+        SELECT *
+        FROM session
+        WHERE session_id = #{sessionId}
+    </select>
+
     <delete id="deleteSession" parameterType="String">
         DELETE FROM session
         WHERE session_id = #{sessionId}

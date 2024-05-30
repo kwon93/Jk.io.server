@@ -19,6 +19,10 @@ public class SessionRepository {
         return template.selectOne("Session-mapper.findByMemberEmail", email);
     }
 
+    public Session findById(String sessionId){
+        return template.selectOne("Session-mapper.findById", sessionId);
+    }
+
     public int deleteSession(String sessionId) {
         return template.delete("Session-mapper.deleteSession", sessionId);
     }

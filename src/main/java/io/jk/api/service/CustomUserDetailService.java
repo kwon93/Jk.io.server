@@ -15,14 +15,11 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(username);
-        if (member == null){
-            throw new UsernameNotFoundException("존재하지 않는 회원입니다.");
-        }
+
         return User.builder()
                 .username(member.getEmail())
                 .password(member.getPassword())

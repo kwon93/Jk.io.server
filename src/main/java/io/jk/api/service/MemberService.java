@@ -11,6 +11,9 @@ import io.jk.api.repository.MemberRepository;
 import io.jk.api.repository.SessionRepository;
 import io.jk.api.service.dto.MemberSignUpResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final SessionRepository sessionRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final CustomUserDetailService userDetailService;
 
 
     @Transactional
@@ -48,7 +52,7 @@ public class MemberService {
     @Transactional
     public String login(LoginRequest loginRequest) {
         Member memberByEmail = memberRepository.findByEmail(loginRequest.getEmail());
-        if (passwordEncoder.matches(loginRequest.getPassword(), memberByEmail.getPassword())) {
+        if (!passwordEncoder.matches(loginRequest.getPassword(), memberByEmail.getPassword())) {
             throw new InvalidPasswordException();
         }
 
@@ -56,8 +60,8 @@ public class MemberService {
         if (isLogin != 1){
             throw new LoginFailException();
         }
-
         Session session = findSessionByMemberEmail(loginRequest);
+
         return session.getSessionId();
     }
 
