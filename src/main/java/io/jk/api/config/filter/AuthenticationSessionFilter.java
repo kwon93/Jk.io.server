@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,9 +31,13 @@ public class AuthenticationSessionFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
-        Cookie cookie = cookies[0];
+        if (cookies == null){
+            filterChain.doFilter(request, response);
+            return;
+        }
+        Cookie cookie = cookies[1];
         String sessionId = cookie.getValue();
-        log.info("cookie >>>> {}", sessionId );
+        log.info("session from cookie >>>> {}", sessionId );
 
         if (sessionId != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = loadUserDetails(sessionId);
