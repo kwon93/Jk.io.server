@@ -35,9 +35,7 @@ public class AuthenticationSessionFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        Cookie cookie = cookies[1];
-        String sessionId = cookie.getValue();
-        log.info("session from cookie >>>> {}", sessionId );
+        String sessionId = cookies[1].getValue();
 
         if (sessionId != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = loadUserDetails(sessionId);
