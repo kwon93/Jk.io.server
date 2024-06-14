@@ -52,6 +52,13 @@ dependencies {
 
 	//MySQL
 	implementation 'mysql:mysql-connector-java:8.0.32'
+
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	//redis session
+	implementation 'org.springframework.session:spring-session-data-redis'
+
+
 }
 
 ext {

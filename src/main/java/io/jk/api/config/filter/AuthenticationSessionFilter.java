@@ -1,7 +1,7 @@
 package io.jk.api.config.filter;
 
 import io.jk.api.domain.Session;
-import io.jk.api.repository.SessionRepository;
+import io.jk.api.repository.MySessionRepository;
 import io.jk.api.service.CustomUserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,14 +17,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
 public class AuthenticationSessionFilter extends OncePerRequestFilter {
 
     private final CustomUserDetailService userDetailService;
-    private final SessionRepository sessionRepository;
+    private final MySessionRepository mySessionRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -52,7 +51,7 @@ public class AuthenticationSessionFilter extends OncePerRequestFilter {
     }
 
     private UserDetails loadUserDetails(String sessionId){
-        Session session = sessionRepository.findById(sessionId);
+        Session session = mySessionRepository.findById(sessionId);
         return userDetailService.loadUserByUsername(session.getMemberEmail());
     }
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class SessionRepository {
+public class MySessionRepository {
 
     private final SqlSessionTemplate template;
 

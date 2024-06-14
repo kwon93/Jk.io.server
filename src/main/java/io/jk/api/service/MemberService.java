@@ -8,12 +8,9 @@ import io.jk.api.exception.InvalidPasswordException;
 import io.jk.api.exception.LoginFailException;
 import io.jk.api.exception.SignupFailException;
 import io.jk.api.repository.MemberRepository;
-import io.jk.api.repository.SessionRepository;
+import io.jk.api.repository.MySessionRepository;
 import io.jk.api.service.dto.MemberSignUpResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +23,7 @@ import java.util.UUID;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final SessionRepository sessionRepository;
+    private final MySessionRepository mySessionRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final CustomUserDetailService userDetailService;
 
@@ -68,15 +65,15 @@ public class MemberService {
     private int sessionProcess(LoginRequest loginRequest, Member memberByEmail) {
         String  uuid = UUID.randomUUID().toString();
         Session session = Session.of(loginRequest, memberByEmail.getMemberId(), uuid);
-        return sessionRepository.createSession(session);
+        return mySessionRepository.createSession(session);
     }
 
     private Session findSessionByMemberEmail(LoginRequest request){
-       return sessionRepository.findByMemberEmail(request.getEmail());
+       return mySessionRepository.findByMemberEmail(request.getEmail());
     }
 
     @Transactional
     public void logout(String sessionId) {
-        sessionRepository.deleteSession(sessionId);
+        mySessionRepository.deleteSession(sessionId);
     }
 }

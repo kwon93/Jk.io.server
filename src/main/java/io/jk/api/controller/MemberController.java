@@ -8,6 +8,7 @@ import io.jk.api.service.dto.MemberSignUpResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseCookie;
@@ -73,6 +74,13 @@ public class MemberController {
                 .maxAge(Duration.ofDays(30))
                 .sameSite("Strict")
                 .build();
+    }
+
+    @PostMapping("sessionTest")
+    private int redisSessionTest(HttpSession session) {
+        int num = 123;
+        session.setAttribute("num", num);
+        return num;
     }
 
 }
